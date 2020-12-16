@@ -1,6 +1,7 @@
 from queue import Queue
 from . import Token, Number
 
+
 class TokenQueue:
     Instance = None
 

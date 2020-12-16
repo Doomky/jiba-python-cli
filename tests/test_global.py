@@ -1,9 +1,9 @@
+from tokens import Token
 from tokens.token_parser import TokenParser
 from tokens.rpn_transformer import RpnTransformer
 from tokens.token_queue import TokenQueue
 from tokens.rpn_calculator import RpnCalculator
 from tokens.number import Number
-import pytest
 
 
 def test_global1():

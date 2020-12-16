@@ -7,7 +7,7 @@ class Number(Token):
         self.digits = digits.copy()
 
     def __str__(self):
-        return ''.join([ str(digit_int) for digit_int in self.digits])
+        return ''.join([str(digit_int) for digit_int in self.digits])
 
-    def compute(self) :
+    def compute(self):
         return self

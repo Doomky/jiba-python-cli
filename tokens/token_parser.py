@@ -3,23 +3,26 @@ from . import Number
 from . import Operator
 import re
 
+
 class TokenParser:
     def __init__(self, input_str: str):
         self.input_str = input_str
 
-    def _parse_number_token(self, i: int, input_str: str, result_tokens: [Token]):
+    @staticmethod
+    def _parse_number_token(i: int, input_str: str, result_tokens: [Token]):
         digits = [int(input_str[i])]
-        i+= 1
-        while (i < len(input_str) and '0' <= input_str[i] <= '9'):
+        i += 1
+        while i < len(input_str) and '0' <= input_str[i] <= '9':
             digits.append(int(input_str[i]))
-            i+=1
+            i += 1
         digits.reverse()
         result_tokens.append(Number(digits))
         return i
 
-    def _parse_operator_token(self, i: int, input_str: str, result_tokens: [Token]):
+    @staticmethod
+    def _parse_operator_token(i: int, input_str: str, result_tokens: [Token]):
         result_tokens.append(Operator())
-        i+=1
+        i += 1
         return i
 
     def parse(self) -> [Token]:
@@ -45,5 +48,5 @@ class TokenParser:
             elif char_i == ' ':
                 i += 1
             else:
-                raise Exception("Could not parse character: " + char_i);
+                raise Exception("Could not parse character: " + char_i)
         return result_tokens

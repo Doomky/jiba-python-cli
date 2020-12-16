@@ -5,6 +5,7 @@ from tokens.operator import Operator
 
 # single digits operations
 
+
 def test_single_addition():
     addition = "1 + 1"
     result: [Token] = TokenParser(addition).parse()
@@ -51,6 +52,7 @@ def test_two_digit_number_addition():
            isinstance(result[1], Operator) and \
            isinstance(result[2], Number)
 
+
 def test_two_digit_number_subtraction():
     subtraction = "12 - 12"
     result: [Token] = TokenParser(subtraction).parse()
@@ -58,6 +60,7 @@ def test_two_digit_number_subtraction():
            isinstance(result[0], Number) and \
            isinstance(result[1], Operator) and \
            isinstance(result[2], Number)
+
 
 def test_two_digit_number_multiplication():
     multiplication = "12 * 12"
@@ -67,6 +70,7 @@ def test_two_digit_number_multiplication():
            isinstance(result[1], Operator) and \
            isinstance(result[2], Number)
 
+
 def test_two_digit_number_division():
     division = "12 / 12"
     result: [Token] = TokenParser(division).parse()
@@ -74,6 +78,7 @@ def test_two_digit_number_division():
            isinstance(result[0], Number) and \
            isinstance(result[1], Operator) and \
            isinstance(result[2], Number)
+
 
 def test_long_operation():
     division = "(12 + 1) * 3 / (4 + 1) "
