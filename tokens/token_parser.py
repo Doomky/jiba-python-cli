@@ -1,6 +1,8 @@
-from . import Token
-from . import Number
-from . import Operator
+from .token import Token
+from .number import Number
+from .operator import Operator
+from .bracket import Bracket, BracketType
+from .operators import Addition, Subtraction, Multiplication, Division
 import re
 
 
@@ -20,10 +22,29 @@ class TokenParser:
         return i
 
     @staticmethod
-    def _parse_operator_token(i: int, input_str: str, result_tokens: [Token]):
-        result_tokens.append(Operator())
-        i += 1
-        return i
+    def _parse_addition_token(i: int, result_tokens: [Token]):
+        result_tokens.append(Addition())
+        return i + 1
+
+    @staticmethod
+    def _parse_subtraction_token(i: int, result_tokens: [Token]):
+        result_tokens.append(Subtraction())
+        return i + 1
+
+    @staticmethod
+    def _parse_multiplication_token(i: int, result_tokens: [Token]):
+        result_tokens.append(Multiplication())
+        return i + 1
+
+    @staticmethod
+    def _parse_division_token(i: int, result_tokens: [Token]):
+        result_tokens.append(Division())
+        return i + 1
+
+    @staticmethod
+    def _parse_bracket_token(i: int, result_tokens: [Token], bracket_type: BracketType):
+        result_tokens.append(Bracket(bracket_type))
+        return i + 1
 
     def parse(self) -> [Token]:
         result_tokens: [Token] = []
@@ -34,17 +55,17 @@ class TokenParser:
             if '0' <= char_i <= '9':
                 i = self._parse_number_token(i, input_str, result_tokens)
             elif char_i == '+':
-                i = self._parse_operator_token(i, input_str, result_tokens)
+                i = self._parse_addition_token(i, result_tokens)
             elif char_i == '-':
-                i = self._parse_operator_token(i, input_str, result_tokens)
+                i = self._parse_subtraction_token(i, result_tokens)
             elif char_i == '*':
-                i = self._parse_operator_token(i, input_str, result_tokens)
+                i = self._parse_multiplication_token(i, result_tokens)
             elif char_i == '/':
-                i = self._parse_operator_token(i, input_str, result_tokens)
+                i = self._parse_division_token(i, result_tokens)
             elif char_i == '(':
-                i = self._parse_operator_token(i, input_str, result_tokens)
+                i = self._parse_bracket_token(i, result_tokens, BracketType.left)
             elif char_i == ')':
-                i = self._parse_operator_token(i, input_str, result_tokens)
+                i =  self._parse_bracket_token(i, result_tokens, BracketType.right)
             elif char_i == ' ':
                 i += 1
             else:
