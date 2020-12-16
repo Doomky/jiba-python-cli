@@ -64,5 +64,5 @@ def test_simple_eight_plus_eight(token_queue, eight):
     addition = Addition()
     result = addition.compute()
     assert len(result.digits) == 2
-    assert result.digits[6] == 1
+    assert result.digits[0] == 6
     assert result.digits[1] == 1
