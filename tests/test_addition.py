@@ -10,7 +10,6 @@ import pytest
 def one():
     return Number([1])
 
-
 # simple addition
 
 def test_simple_single_digit_addition(one):
