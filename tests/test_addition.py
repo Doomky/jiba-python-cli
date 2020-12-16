@@ -31,6 +31,9 @@ def ten():
 def ninety_nine():
     return Number([9, 9])
 
+@pytest.fixture
+def nine_nine():
+    return Number([9, 9, 9, 9, 9, 9, 9, 9, 9])
 
 @pytest.fixture
 def token_queue():
@@ -96,3 +99,20 @@ def test_simple_zero_plus_zero_large(token_queue, zero, zero_large):
     result = addition.compute()
     assert len(result.digits) == 1
     assert result.digits[0] == 0
+
+def test_simple_nine_nine_plus_one(token_queue, nine_nine, one):
+    token_queue.put(nine_nine)
+    token_queue.put(one)
+    addition = Addition()
+    result = addition.compute()
+    assert len(result.digits) == 10
+    assert result.digits[0] == 0
+    assert result.digits[1] == 0
+    assert result.digits[2] == 0
+    assert result.digits[3] == 0
+    assert result.digits[4] == 0
+    assert result.digits[5] == 0
+    assert result.digits[6] == 0
+    assert result.digits[7] == 0
+    assert result.digits[8] == 0
+    assert result.digits[9] == 1
