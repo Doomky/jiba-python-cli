@@ -1,6 +1,5 @@
 from queue import Queue
-from tokens import Token, Number
-
+from . import Token, Number
 
 class TokenQueue:
     Instance = None
@@ -14,7 +13,7 @@ class TokenQueue:
             TokenQueue.Instance = TokenQueue()
         return TokenQueue.Instance
 
-    def put(self, token : Token):
+    def put(self, token: Token):
         self.queue.put(token)
 
     def get_next(self) -> Number:

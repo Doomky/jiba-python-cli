@@ -1,4 +1,4 @@
-from tokens import Token, Number
+from . import Token, Number
 
 
 class Operator(Token):
