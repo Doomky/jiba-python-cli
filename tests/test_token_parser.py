@@ -6,5 +6,19 @@ from tokens.operator import Operator
 def test_single_addition():
     addition = "1 + 1"
     result: [Token] = TokenParser(addition).parse()
+    assert isinstance(result[0], Number) and isinstance(result[1], Operator) and (result[2], Number)
 
+def test_single_substraction():
+    addition = "1 - 1"
+    result: [Token] = TokenParser(addition).parse()
+    assert isinstance(result[0], Number) and isinstance(result[1], Operator) and (result[2], Number)
+
+def test_single_multiplication():
+    addition = "1 * 1"
+    result: [Token] = TokenParser(addition).parse()
+    assert isinstance(result[0], Number) and isinstance(result[1], Operator) and (result[2], Number)
+
+def test_single_division():
+    addition = "1 / 1"
+    result: [Token] = TokenParser(addition).parse()
     assert isinstance(result[0], Number) and isinstance(result[1], Operator) and (result[2], Number)
