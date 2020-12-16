@@ -38,6 +38,12 @@ class TokenParser:
                 i = self._parse_operator_token(i, input_str, result_tokens)
             elif char_i == '/':
                 i = self._parse_operator_token(i, input_str, result_tokens)
+            elif char_i == '(':
+                i = self._parse_operator_token(i, input_str, result_tokens)
+            elif char_i == ')':
+                i = self._parse_operator_token(i, input_str, result_tokens)
             elif char_i == ' ':
                 i += 1
+            else:
+                raise Exception("Could not parse character: " + char_i);
         return result_tokens
