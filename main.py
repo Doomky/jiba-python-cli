@@ -12,7 +12,6 @@ notationOption = typer.Option(Notation.infix, "--notation", "-n", help="calculat
 baseOption = typer.Option(10, "--base", "-b", help="base for the compute")
 
 
-
 @app.command()
 def compute(calculation: str,
             notation: Notation = notationOption,
@@ -20,7 +19,8 @@ def compute(calculation: str,
     typer.echo(f"Selected Notation: {notation}")
     typer.echo(f"Selected Base: {base}")
     typer.echo(f"Calculation: {calculation}")
-    raise Exception();
+    raise Exception()
+
 
 if __name__ == "__main__":
     app()

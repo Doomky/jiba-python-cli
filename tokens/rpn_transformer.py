@@ -1,7 +1,9 @@
 from . import Token
 
+
 class TokenQueue:
     pass
+
 
 class RpnTransformer:
 

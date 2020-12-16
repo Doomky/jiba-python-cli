@@ -1,7 +1,9 @@
 from . import Number
 
+
 class TokenQueue:
     pass
+
 
 class RpnCalculator:
 
