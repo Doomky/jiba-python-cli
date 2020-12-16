@@ -8,13 +8,12 @@ class TokenParser:
         self.input_str = input_str
 
     def _parse_number_token(self, i: int, input_str: str, result_tokens: [Token]):
-
         digits = [int(input_str[i])]
         i+= 1
-
         while (i < len(input_str) and '0' <= input_str[i] <= '9'):
             digits.append(int(input_str[i]))
             i+=1
+        digits.reverse()
         result_tokens.append(Number(digits))
         return i
 
@@ -25,7 +24,6 @@ class TokenParser:
 
     def parse(self) -> [Token]:
         result_tokens: [Token] = []
-
         input_str = self.input_str
         i = 0
         while i < len(input_str):
@@ -42,5 +40,4 @@ class TokenParser:
                 i = self._parse_operator_token(i, input_str, result_tokens)
             elif char_i == ' ':
                 i += 1
-
         return result_tokens
