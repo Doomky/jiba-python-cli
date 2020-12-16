@@ -19,6 +19,10 @@ class TokenQueue:
             TokenQueue.Instance = TokenQueue()
         return TokenQueue.Instance
 
+    def clear(self):
+        while not self.queue.empty():
+            self.queue.get()
+
     def put(self, token: Token):
         self.queue.put(token)
 
