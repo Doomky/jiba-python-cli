@@ -1,4 +1,4 @@
-from tokens.number import Number
+from tokens.number import Number, Sign
 from tokens.operator import Operator
 from tokens.token_queue import TokenQueue
 
@@ -10,6 +10,8 @@ class Subtraction(Operator):
         return self.compute_with_numbers(a, b)
 
     def compute_with_numbers(self, a: Number, b: Number) -> Number:
+        if a < b:
+            return Number(self.compute_with_numbers(b, a).digits, Sign.negative)
         res = []
         carry = 0
         for i in range(max(len(a.digits), len(b.digits))):
