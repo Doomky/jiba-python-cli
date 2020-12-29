@@ -10,7 +10,9 @@ class Subtraction(Operator):
         return self.compute_with_numbers(a, b)
 
     def compute_with_numbers(self, a: Number, b: Number) -> Number:
-        if a < b:
+        if a.sign == b.sign == Sign.negative:
+            return self.compute_with_numbers(Number(b.digits, Sign.positive), Number(a.digits, Sign.positive))
+        elif a < b:
             return Number(self.compute_with_numbers(b, a).digits, Sign.negative)
         res = []
         carry = 0
