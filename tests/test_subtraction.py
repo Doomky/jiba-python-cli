@@ -93,3 +93,25 @@ def test_negative_numbers_subtraction(token_queue):
     assert result.sign == Sign.positive
     assert len(result.digits) == 1
     assert result.digits[0] == 8
+
+
+def test_opposite_signs_numbers_subtraction1(token_queue):
+    token_queue.put(Number([2, 1], Sign.negative))
+    token_queue.put(Number([3, 1], Sign.positive))
+    subtraction = Subtraction()
+    result = subtraction.compute()
+    assert result.sign == Sign.negative
+    assert len(result.digits) == 2
+    assert result.digits[0] == 5
+    assert result.digits[1] == 2
+
+
+def test_opposite_signs_numbers_subtraction2(token_queue):
+    token_queue.put(Number([2, 1], Sign.positive))
+    token_queue.put(Number([3, 1], Sign.negative))
+    subtraction = Subtraction()
+    result = subtraction.compute()
+    assert result.sign == Sign.positive
+    assert len(result.digits) == 2
+    assert result.digits[0] == 5
+    assert result.digits[1] == 2
