@@ -63,3 +63,12 @@ def test_simple_carry(token_queue, ten):
     assert len(result.digits) == 2
     assert result.digits[0] == 8
     assert result.digits[1] == 1
+
+def test_leading_zero_removal(token_queue, ten):
+    token_queue.put(Number([3, 5]))
+    token_queue.put(Number([1, 5]))
+    addition = Subtraction()
+    result = addition.compute()
+    assert result.sign == Sign.positive
+    assert len(result.digits) == 1
+    assert result.digits[0] == 2
