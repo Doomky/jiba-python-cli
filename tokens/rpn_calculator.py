@@ -1,8 +1,5 @@
 from . import Number
-
-
-class TokenQueue:
-    pass
+from .token_queue import TokenQueue
 
 
 class RpnCalculator:
@@ -11,4 +8,7 @@ class RpnCalculator:
         self.token_queue = token_queue
 
     def compute(self) -> Number:
-        raise Exception("Could not compute tokenQueue")
+        result = self.token_queue.get_next()
+        if not self.token_queue.empty():
+            raise ValueError("TokenQueue was not empty after RPN compute")
+        return result

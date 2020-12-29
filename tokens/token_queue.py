@@ -16,6 +16,9 @@ class TokenQueue:
             TokenQueue.Instance = TokenQueue()
         return TokenQueue.Instance
 
+    def empty(self):
+        return self.queue.empty()
+
     def clear(self):
         while not self.queue.empty():
             self.queue.get()
