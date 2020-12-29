@@ -8,3 +8,6 @@ class Operator(Token):
 
     def compute(self) -> Number :
         raise Exception("Unknown token")
+
+    def compute_with_numbers(a : Number, b : Number) -> Number:
+        raise Exception("Unknown token")

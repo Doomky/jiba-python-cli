@@ -9,6 +9,10 @@ class Addition(Operator):
     def compute(self) -> Number:
         a: Number = TokenQueue.get_instance().get_next()
         b: Number = TokenQueue.get_instance().get_next()
+        return self.compute_with_numbers(a, b)
+
+
+    def compute_with_numbers(self, a: Number, b: Number) -> Number:
 
         if a.sign != b.sign:
             return Subtraction().compute()
