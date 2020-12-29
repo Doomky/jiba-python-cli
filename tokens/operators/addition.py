@@ -1,4 +1,4 @@
-from tokens.number import Number
+from tokens.number import Number, Sign
 from tokens.operator import Operator
 from tokens.operators.subtraction import Subtraction
 from tokens.token_queue import TokenQueue
@@ -15,7 +15,10 @@ class Addition(Operator):
     def compute_with_numbers(self, a: Number, b: Number) -> Number:
 
         if a.sign != b.sign:
-            return Subtraction().compute()
+            if b.sign == Sign.negative:
+                return Subtraction().compute_with_numbers(a, b.opposite_inverse())
+            else:
+                return Subtraction().compute_with_numbers(b,a.opposite_inverse())
 
         a_digits = a.digits.copy()
         b_digits = b.digits.copy()
