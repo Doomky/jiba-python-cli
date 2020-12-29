@@ -83,3 +83,13 @@ def test_negative_result_subtraction(token_queue, one, two):
     assert result.sign == Sign.negative
     assert len(result.digits) == 1
     assert result.digits[0] == 1
+
+
+def test_negative_numbers_subtraction(token_queue):
+    token_queue.put(Number([4, 5], Sign.negative))
+    token_queue.put(Number([2, 6], Sign.negative))
+    subtraction = Subtraction()
+    result = subtraction.compute()
+    assert result.sign == Sign.positive
+    assert len(result.digits) == 1
+    assert result.digits[0] == 8
