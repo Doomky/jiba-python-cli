@@ -36,6 +36,10 @@ def ninety_nine():
     return Number([9, 9])
 
 @pytest.fixture
+def minus_ninety_nine():
+    return Number([9, 9], Sign.negative)
+
+@pytest.fixture
 def nine_nine():
     return Number([9, 9, 9, 9, 9, 9, 9, 9, 9])
 
