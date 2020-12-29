@@ -150,3 +150,34 @@ def test_simple_nine_nine_plus_one(token_queue, nine_nine, one):
     assert result.digits[7] == 0
     assert result.digits[8] == 0
     assert result.digits[9] == 1
+
+
+# different sign
+
+def test_simple_one_plus_minus_one(token_queue, one, minus_one):
+    token_queue.put(one)
+    token_queue.put(minus_one)
+    addition = Addition()
+    result = addition.compute()
+    assert len(result.digits) == 1
+    assert result.digits[0] == 0
+
+def test_simple_one_plus_minus_ninety_nine(token_queue, one, minus_ninety_nine):
+    token_queue.put(one)
+    token_queue.put(minus_ninety_nine)
+    addition = Addition()
+    result = addition.compute()
+    assert result.sign == Sign.negative
+    assert len(result.digits) == 2
+    assert result.digits[0] == 8
+    assert result.digits[0] == 9
+
+def test_simple_one_plus_minus_ninety_nine(token_queue, minus_one, one):
+    token_queue.put(minus_one)
+    token_queue.put(one)
+    addition = Addition()
+    result = addition.compute()
+    assert result.sign == Sign.negative
+    assert len(result.digits) == 2
+    assert result.digits[0] == 8
+    assert result.digits[0] == 9

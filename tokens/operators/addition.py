@@ -18,7 +18,7 @@ class Addition(Operator):
             if b.sign == Sign.negative:
                 return Subtraction().compute_with_numbers(a, b.opposite_inverse())
             else:
-                return Subtraction().compute_with_numbers(b,a.opposite_inverse())
+                return Subtraction().compute_with_numbers(b, a.opposite_inverse())
 
         a_digits = a.digits.copy()
         b_digits = b.digits.copy()

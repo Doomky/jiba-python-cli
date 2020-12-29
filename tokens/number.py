@@ -18,4 +18,4 @@ class Number(Token):
         return self
 
     def opposite_inverse(self):
-        Number(self.digits.copy(), Sign.positive if sign is Sign.negative else Sign.negative)
+        return Number(self.digits.copy(), Sign.positive if self.sign is Sign.negative else Sign.negative)
