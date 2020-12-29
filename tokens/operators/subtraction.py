@@ -10,5 +10,8 @@ class Subtraction(Operator):
         return self.compute_with_numbers(a, b)
 
     def compute_with_numbers(self, a: Number, b: Number) -> Number:
-        diff = a.digits[0] - b.digits[0]
-        return Number([diff])
+        res = []
+        for i in range(max(len(a.digits), len(b.digits))):
+            diff = a.digits[i] - b.digits[i]
+            res.append(diff)
+        return Number(res)
