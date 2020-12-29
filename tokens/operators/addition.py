@@ -37,13 +37,13 @@ class Addition(Operator):
         carry_over = 0
         for i in range(len(res_digits)):
             res_digits[i] += carry_over
-            carry_over =  res_digits[i] // CommandContext.Base
+            carry_over = res_digits[i] // CommandContext.Base
             res_digits[i] = res_digits[i] % CommandContext.Base
 
         if carry_over != 0:
             res_digits.append(carry_over)
         else:
             while len(res_digits) > 1 and res_digits[-1] == 0:
-                    res_digits.pop()
+                res_digits.pop()
 
         return Number(res_digits, a.sign)

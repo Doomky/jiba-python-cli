@@ -17,9 +17,9 @@ class Subtraction(Operator):
     def compute_with_numbers(self, a: Number, b: Number) -> Number:
         if a.sign != b.sign:
             return addition()\
-                .compute_with_numbers(Number(a.digits, a.sign), Number(b.digits, Sign.opposite(b.sign)))
+                .compute_with_numbers(Number(a.digits, a.sign), b.opposite_inverse())
         elif a.sign == b.sign == Sign.negative:
-            return self.compute_with_numbers(Number(b.digits, Sign.positive), Number(a.digits, Sign.positive))
+            return self.compute_with_numbers(b.opposite_inverse(), a.opposite_inverse())
         elif a < b:
             return Number(self.compute_with_numbers(b, a).digits, Sign.negative)
         res = []

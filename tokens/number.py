@@ -53,4 +53,4 @@ class Number(Token):
         return self
 
     def opposite_inverse(self):
-        return Number(self.digits.copy(), Sign.positive if self.sign is Sign.negative else Sign.negative)
+        return Number(self.digits.copy(), Sign.opposite(self.sign))
