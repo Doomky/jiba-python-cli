@@ -6,6 +6,13 @@ class Sign(int, Enum):
     positive = 1
     negative = 2
 
+    @staticmethod
+    def opposite(number):
+        if number == Sign.positive:
+            return Sign.negative
+        else:
+            return Sign.positive
+
 
 class Number(Token):
     def __init__(self, digits: [int], sign=Sign.positive):

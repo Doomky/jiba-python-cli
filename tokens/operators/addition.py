@@ -1,8 +1,13 @@
 from tokens.number import Number, Sign
 from tokens.operator import Operator
-from tokens.operators.subtraction import Subtraction
 from tokens.token_queue import TokenQueue
 from command_context import CommandContext
+
+
+def subtraction():
+    from tokens.operators.subtraction import Subtraction
+    return Subtraction()
+
 
 class Addition(Operator):
 
@@ -11,14 +16,12 @@ class Addition(Operator):
         b: Number = TokenQueue.get_instance().get_next()
         return self.compute_with_numbers(a, b)
 
-
     def compute_with_numbers(self, a: Number, b: Number) -> Number:
-
         if a.sign != b.sign:
             if b.sign == Sign.negative:
-                return Subtraction().compute_with_numbers(a, b.opposite_inverse())
+                return subtraction().compute_with_numbers(a, b.opposite_inverse())
             else:
-                return Subtraction().compute_with_numbers(b, a.opposite_inverse())
+                return subtraction().compute_with_numbers(b, a.opposite_inverse())
 
         a_digits = a.digits.copy()
         b_digits = b.digits.copy()

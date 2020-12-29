@@ -2,15 +2,23 @@ from tokens.number import Number, Sign
 from tokens.operator import Operator
 from tokens.token_queue import TokenQueue
 
+def addition():
+    from tokens.operators.addition import Addition
+    return Addition()
+
 
 class Subtraction(Operator):
+
     def compute(self) -> Number:
         a: Number = TokenQueue.get_instance().get_next()
         b: Number = TokenQueue.get_instance().get_next()
         return self.compute_with_numbers(a, b)
 
     def compute_with_numbers(self, a: Number, b: Number) -> Number:
-        if a.sign == b.sign == Sign.negative:
+        if a.sign != b.sign:
+            return addition()\
+                .compute_with_numbers(Number(a.digits, a.sign), Number(b.digits, Sign.opposite(b.sign)))
+        elif a.sign == b.sign == Sign.negative:
             return self.compute_with_numbers(Number(b.digits, Sign.positive), Number(a.digits, Sign.positive))
         elif a < b:
             return Number(self.compute_with_numbers(b, a).digits, Sign.negative)
