@@ -20,4 +20,13 @@ class Subtraction(Operator):
             else:
                 carry = 0
             res.append(diff)
-        return Number(res)
+        real_res_len = len(res)
+        for digit in res[::-1]:
+            if digit == 0:
+                real_res_len -= 1
+            else:
+                break
+        if real_res_len <= 1:
+            return Number([res[0]])
+        else:
+            return Number(res[:real_res_len])

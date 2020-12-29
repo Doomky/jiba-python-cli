@@ -54,7 +54,7 @@ def test_two_digits_subtraction(token_queue, ten):
     assert result.digits[1] == 4
 
 
-def test_simple_carry(token_queue, ten):
+def test_simple_carry(token_queue):
     token_queue.put(Number([3, 5]))
     token_queue.put(Number([5, 3]))
     addition = Subtraction()
@@ -64,7 +64,7 @@ def test_simple_carry(token_queue, ten):
     assert result.digits[0] == 8
     assert result.digits[1] == 1
 
-def test_leading_zero_removal(token_queue, ten):
+def test_leading_zero_removal(token_queue):
     token_queue.put(Number([3, 5]))
     token_queue.put(Number([1, 5]))
     addition = Subtraction()
