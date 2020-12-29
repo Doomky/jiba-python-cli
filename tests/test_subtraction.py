@@ -23,8 +23,8 @@ def token_queue():
 # simple subtraction
 
 def test_simple_two_minus_one(token_queue, one, two):
-    token_queue.put(one)
     token_queue.put(two)
+    token_queue.put(one)
     addition = Subtraction()
     result = addition.compute()
     assert result.sign == Sign.positive
