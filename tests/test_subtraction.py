@@ -36,8 +36,8 @@ def token_queue():
 def test_simple_two_minus_one(token_queue, one, two):
     token_queue.put(two)
     token_queue.put(one)
-    addition = Subtraction()
-    result = addition.compute()
+    subtraction = Subtraction()
+    result = subtraction.compute()
     assert result.sign == Sign.positive
     assert len(result.digits) == 1
     assert result.digits[0] == 1
@@ -46,8 +46,8 @@ def test_simple_two_minus_one(token_queue, one, two):
 def test_two_digits_subtraction(token_queue, ten):
     token_queue.put(Number([0, 5]))
     token_queue.put(ten)
-    addition = Subtraction()
-    result = addition.compute()
+    subtraction = Subtraction()
+    result = subtraction.compute()
     assert result.sign == Sign.positive
     assert len(result.digits) == 2
     assert result.digits[0] == 0
@@ -57,18 +57,29 @@ def test_two_digits_subtraction(token_queue, ten):
 def test_simple_carry(token_queue):
     token_queue.put(Number([3, 5]))
     token_queue.put(Number([5, 3]))
-    addition = Subtraction()
-    result = addition.compute()
+    subtraction = Subtraction()
+    result = subtraction.compute()
     assert result.sign == Sign.positive
     assert len(result.digits) == 2
     assert result.digits[0] == 8
     assert result.digits[1] == 1
 
+
 def test_leading_zero_removal(token_queue):
     token_queue.put(Number([3, 5]))
     token_queue.put(Number([1, 5]))
-    addition = Subtraction()
-    result = addition.compute()
+    subtraction = Subtraction()
+    result = subtraction.compute()
     assert result.sign == Sign.positive
     assert len(result.digits) == 1
     assert result.digits[0] == 2
+
+
+def test_negative_result_subtraction(token_queue, one, two):
+    token_queue.put(one)
+    token_queue.put(two)
+    subtraction = Subtraction()
+    result = subtraction.compute()
+    assert result.sign == Sign.negative
+    assert len(result.digits) == 1
+    assert result.digits[0] == 1
