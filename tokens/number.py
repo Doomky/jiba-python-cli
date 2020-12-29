@@ -12,7 +12,7 @@ class Number(Token):
         self.sign = sign
 
     def __str__(self):
-        return ''.join([str(digit_int) for digit_int in self.digits])
+        return ('' if self.sign == Sign.positive else '-').join([str(digit_int) for digit_int in self.digits])
 
     def compute(self):
         return self
