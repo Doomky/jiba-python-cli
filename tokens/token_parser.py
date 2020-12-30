@@ -3,7 +3,6 @@ from .number import Number
 from .operator import Operator
 from .bracket import Bracket, BracketType
 from .operators import Addition, Subtraction, Multiplication, Division
-import re
 
 
 class TokenParser:
