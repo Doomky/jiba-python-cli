@@ -213,4 +213,34 @@ def test_large_number_times_zero(token_queue, large_number, zero):
     assert result.sign == Sign.positive
     assert len(result.digits) == 1
     assert result.digits[0] == 0
-    
+
+
+# Negative numbers multiplication
+
+def test_one_times_minus_one(token_queue, one, minus_one):
+    token_queue.put(one)
+    token_queue.put(minus_one)
+    multiplication = Multiplication()
+    result = multiplication.compute()
+    assert result.sign == Sign.negative
+    assert len(result.digits) == 1
+    assert result.digits[0] == 1
+
+
+def test_minus_one_times_one(token_queue, minus_one, one):
+    token_queue.put(minus_one)
+    token_queue.put(one)
+    multiplication = Multiplication()
+    result = multiplication.compute()
+    assert result.sign == Sign.negative
+    assert len(result.digits) == 1
+    assert result.digits[0] == 1
+
+def test_minus_one_times_minus_one(token_queue, minus_one):
+    token_queue.put(minus_one)
+    token_queue.put(minus_one)
+    multiplication = Multiplication()
+    result = multiplication.compute()
+    assert result.sign == Sign.positive
+    assert len(result.digits) == 1
+    assert result.digits[0] == 1
