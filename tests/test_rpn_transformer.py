@@ -80,3 +80,69 @@ def test_multiple_operations():
     assert isinstance(token_queue_list[8], Addition)
     assert isinstance(token_queue_list[9], Number)
     assert isinstance(token_queue_list[10], Subtraction)
+
+
+def test_addition_and_multiplication_parenthesis():
+    input = "(3 + 4) * 5"
+    token_list: [Token] = TokenParser(input).parse()
+    token_queue: TokenQueue = RpnTransformer(token_list).transform()
+    token_queue_list = list(token_queue.queue.queue)
+    assert len(token_queue_list) == 5
+    assert isinstance(token_queue_list[0], Number)
+    assert isinstance(token_queue_list[1], Number)
+    assert isinstance(token_queue_list[2], Addition)
+    assert isinstance(token_queue_list[3], Number)
+    assert isinstance(token_queue_list[4], Multiplication)
+
+
+def test_multiple_operations_parenthesis():
+    input = "(3 + 4) * (5 - 4)"
+    token_list: [Token] = TokenParser(input).parse()
+    token_queue: TokenQueue = RpnTransformer(token_list).transform()
+    token_queue_list = list(token_queue.queue.queue)
+    assert len(token_queue_list) == 7
+    assert isinstance(token_queue_list[0], Number)
+    assert isinstance(token_queue_list[1], Number)
+    assert isinstance(token_queue_list[2], Addition)
+    assert isinstance(token_queue_list[3], Number)
+    assert isinstance(token_queue_list[4], Number)
+    assert isinstance(token_queue_list[5], Subtraction)
+    assert isinstance(token_queue_list[6], Multiplication)
+
+
+def test_multiple_operations_multiple_parenthesis():
+    input = "2 * (5 - (5 / 4))"
+    token_list: [Token] = TokenParser(input).parse()
+    token_queue: TokenQueue = RpnTransformer(token_list).transform()
+    token_queue_list = list(token_queue.queue.queue)
+    assert len(token_queue_list) == 7
+    assert isinstance(token_queue_list[0], Number)
+    assert isinstance(token_queue_list[1], Number)
+    assert isinstance(token_queue_list[2], Number)
+    assert isinstance(token_queue_list[3], Number)
+    assert isinstance(token_queue_list[4], Division)
+    assert isinstance(token_queue_list[5], Subtraction)
+    assert isinstance(token_queue_list[6], Multiplication)
+
+
+def test_multiple_operations_multiple_parenthesis_complex():
+    input = "((7 + 5) * 9) / ((4 + 2) * 2) * (7 - 8)"
+    token_list: [Token] = TokenParser(input).parse()
+    token_queue: TokenQueue = RpnTransformer(token_list).transform()
+    token_queue_list = list(token_queue.queue.queue)
+    assert len(token_queue_list) == 15
+    assert isinstance(token_queue_list[0], Number)
+    assert isinstance(token_queue_list[1], Number)
+    assert isinstance(token_queue_list[2], Addition)
+    assert isinstance(token_queue_list[3], Number)
+    assert isinstance(token_queue_list[4], Multiplication)
+    assert isinstance(token_queue_list[5], Number)
+    assert isinstance(token_queue_list[6], Number)
+    assert isinstance(token_queue_list[7], Addition)
+    assert isinstance(token_queue_list[8], Number)
+    assert isinstance(token_queue_list[9], Multiplication)
+    assert isinstance(token_queue_list[10], Division)
+    assert isinstance(token_queue_list[11], Number)
+    assert isinstance(token_queue_list[12], Number)
+    assert isinstance(token_queue_list[13], Subtraction)
+    assert isinstance(token_queue_list[14], Multiplication)
