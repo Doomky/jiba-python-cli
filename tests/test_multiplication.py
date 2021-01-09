@@ -191,3 +191,26 @@ def test_ten_times_ten(token_queue, ten):
     assert result.digits[0] == 0
     assert result.digits[1] == 0
     assert result.digits[2] == 1
+
+
+# By zero multiplication
+
+def test_zero_times_large_number(token_queue, zero, large_number):
+    token_queue.put(zero)
+    token_queue.put(large_number)
+    multiplication = Multiplication()
+    result = multiplication.compute()
+    assert result.sign == Sign.positive
+    assert len(result.digits) == 1
+    assert result.digits[0] == 0
+
+
+def test_large_number_times_zero(token_queue, large_number, zero):
+    token_queue.put(large_number)
+    token_queue.put(zero)
+    multiplication = Multiplication()
+    result = multiplication.compute()
+    assert result.sign == Sign.positive
+    assert len(result.digits) == 1
+    assert result.digits[0] == 0
+    
