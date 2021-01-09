@@ -2,19 +2,15 @@ from queue import Queue
 from . import Token, Number
 
 
-# forward declaration for type checking
 class TokenQueue:
-    pass
-
-
-class TokenQueue:
+    queue: Queue
     Instance = None
 
     def __init__(self):
         self.queue = Queue()
 
     @staticmethod
-    def get_instance() -> TokenQueue:
+    def get_instance():
         if TokenQueue.Instance is None:
             TokenQueue.Instance = TokenQueue()
         return TokenQueue.Instance
