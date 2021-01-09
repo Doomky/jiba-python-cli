@@ -4,13 +4,15 @@ from tokens.operators.subtraction import Subtraction
 from tokens.token_queue import TokenQueue
 from command_context import CommandContext
 
+
 class Addition(Operator):
+
+    precedence = 1
 
     def compute(self) -> Number:
         a: Number = TokenQueue.get_instance().get_next()
         b: Number = TokenQueue.get_instance().get_next()
         return self.compute_with_numbers(a, b)
-
 
     def compute_with_numbers(self, a: Number, b: Number) -> Number:
 
@@ -41,6 +43,6 @@ class Addition(Operator):
             res_digits.append(carry_over)
         else:
             while len(res_digits) > 1 and res_digits[-1] == 0:
-                    res_digits.pop()
+                res_digits.pop()
 
         return Number(res_digits, a.sign)
