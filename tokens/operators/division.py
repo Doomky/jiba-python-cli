@@ -15,7 +15,10 @@ class DividingByZeroError(Exception):
 class Division(Operator):
 
     precedence = 2
-    
+
+    def __str__(self):
+        return "/"
+
     def compute(self) -> Number:
         b: Number = TokenStack.get_instance().pop()
         a: Number = TokenStack.get_instance().pop()

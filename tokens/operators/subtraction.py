@@ -13,6 +13,9 @@ class Subtraction(Operator):
 
     precedence = 1
 
+    def __str__(self):
+        return "-"
+
     def compute(self) -> Number:
         b: Number = TokenStack.get_instance().pop()
         a: Number = TokenStack.get_instance().pop()

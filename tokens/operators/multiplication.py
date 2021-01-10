@@ -8,7 +8,10 @@ from command_context import CommandContext
 class Multiplication(Operator):
 
     precedence = 2
-    
+
+    def __str__(self):
+        return "*"
+
     def compute(self) -> Number:
         b: Number = TokenStack.get_instance().pop()
         a: Number = TokenStack.get_instance().pop()
