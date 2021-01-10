@@ -13,7 +13,7 @@ class Notation(str, Enum):
 
 app = typer.Typer()
 notationOption: Notation = typer.Option(Notation.infix, "--notation", "-n", help="Calculation notation")
-baseOption: int = typer.Option(10, "--base", "-b", help="Base for the calculation", min=2)
+baseOption: int = typer.Option(10, "--base", "-b", help="Base for the calculation", min=2, max=10)
 
 
 @app.command()
