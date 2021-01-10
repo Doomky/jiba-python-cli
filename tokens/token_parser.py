@@ -1,9 +1,7 @@
 from .token import Token
 from .number import Number
-from .operator import Operator
-from .bracket import Bracket, BracketType
+from .parenthesis import Parenthesis, ParenthesisType
 from .operators import Addition, Subtraction, Multiplication, Division
-import re
 
 
 class TokenParser:
@@ -42,8 +40,8 @@ class TokenParser:
         return i + 1
 
     @staticmethod
-    def _parse_bracket_token(i: int, result_tokens: [Token], bracket_type: BracketType):
-        result_tokens.append(Bracket(bracket_type))
+    def _parse_bracket_token(i: int, result_tokens: [Token], bracket_type: ParenthesisType):
+        result_tokens.append(Parenthesis(bracket_type))
         return i + 1
 
     def parse(self) -> [Token]:
@@ -63,9 +61,9 @@ class TokenParser:
             elif char_i == '/':
                 i = self._parse_division_token(i, result_tokens)
             elif char_i == '(':
-                i = self._parse_bracket_token(i, result_tokens, BracketType.left)
+                i = self._parse_bracket_token(i, result_tokens, ParenthesisType.left)
             elif char_i == ')':
-                i =  self._parse_bracket_token(i, result_tokens, BracketType.right)
+                i =  self._parse_bracket_token(i, result_tokens, ParenthesisType.right)
             elif char_i == ' ':
                 i += 1
             else:

@@ -3,12 +3,15 @@ from tokens.operator import Operator
 from tokens.token_queue import TokenQueue
 from command_context import CommandContext
 
+
 def addition():
     from tokens.operators.addition import Addition
     return Addition()
 
 
 class Subtraction(Operator):
+
+    precedence = 1
 
     def compute(self) -> Number:
         a: Number = TokenQueue.get_instance().get_next()

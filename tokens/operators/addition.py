@@ -11,6 +11,8 @@ def subtraction():
 
 class Addition(Operator):
 
+    precedence = 1
+
     def compute(self) -> Number:
         a: Number = TokenQueue.get_instance().get_next()
         b: Number = TokenQueue.get_instance().get_next()
