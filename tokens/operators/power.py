@@ -1,4 +1,4 @@
-from tokens.number import Number, Sign
+from tokens.number import Number
 from tokens.operator import Operator
 from tokens.token_stack import TokenStack
 

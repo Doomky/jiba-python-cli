@@ -25,6 +25,7 @@ class TokenStack:
         self.stack.append(token)
 
     def pop(self) -> Number:
-        if self.empty(): return None
+        if self.empty():
+            return None
         token = self.stack.pop()
         return token.compute()
