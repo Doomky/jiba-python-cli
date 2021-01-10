@@ -47,7 +47,9 @@ class Number(Token):
         self.sign = sign
 
     def __str__(self):
-        return ('' if self.sign == Sign.positive else '-').join([str(digit_int) for digit_int in self.digits])
+        digits_cpy = self.digits.copy()
+        digits_cpy.reverse()
+        return ('' if self.sign == Sign.positive else '-').join([str(digit_int) for digit_int in digits_cpy])
 
     def __len__(self):
         return len(self.digits)

@@ -1,7 +1,7 @@
 from tokens import Token
 from tokens.token_parser import TokenParser
 from tokens.rpn_transformer import RpnTransformer
-from tokens.token_queue import TokenQueue
+from tokens.token_stack import TokenStack
 from tokens.rpn_calculator import RpnCalculator
 from tokens.number import Number
 
@@ -11,8 +11,8 @@ def test_global1():
 
     token_list: [Token] = TokenParser(calculation_str).parse()
 
-    token_queue: TokenQueue = RpnTransformer(token_list).transform()
+    token_stack: TokenStack = RpnTransformer(token_list).transform()
 
-    number: Number = RpnCalculator(token_queue).compute()
+    number: Number = RpnCalculator(token_stack).compute()
 
     assert str(number) == "21"

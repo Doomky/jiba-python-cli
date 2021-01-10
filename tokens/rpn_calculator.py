@@ -1,14 +1,14 @@
 from . import Number
-from .token_queue import TokenQueue
+from .token_stack import TokenStack
 
 
 class RpnCalculator:
 
-    def __init__(self, token_queue: TokenQueue):
-        self.token_queue = token_queue
+    def __init__(self, token_stack: TokenStack):
+        self.token_stack = token_stack
 
     def compute(self) -> Number:
-        result = self.token_queue.get_next()
-        if not self.token_queue.empty():
+        result = self.token_stack.pop()
+        if not self.token_stack.empty():
             raise ValueError("TokenQueue was not empty after RPN compute")
         return result
