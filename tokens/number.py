@@ -2,6 +2,26 @@ from . import Token
 from enum import Enum
 
 
+def addition():
+    from tokens.operators.addition import Addition
+    return Addition()
+
+
+def subtraction():
+    from tokens.operators.subtraction import Subtraction
+    return Subtraction()
+
+
+def multiplication():
+    from tokens.operators.multiplication import Multiplication
+    return Multiplication()
+
+
+def division():
+    from tokens.operators.division import Division
+    return Division()
+
+
 class Sign(int, Enum):
     positive = 1
     negative = 2
@@ -28,6 +48,12 @@ class Number(Token):
     def __getitem__(self, index: int):
         return self.digits[index]
 
+    def __delitem__(self, key):
+        del self.digits[key]
+
+    def __setitem__(self, key, value):
+        self.digits[key] = value
+
     def __eq__(self, other):
         return self.sign == other.sign\
                and len(self) == len(other)\
@@ -49,8 +75,38 @@ class Number(Token):
                 return self.sign == Sign.positive
         return False
 
+    def __lt__(self, other):
+        return other > self
+
+    def __le__(self, other):
+        return not (self > other)
+
+    def __ne__(self, other):
+        return not (self == other)
+
+    def __ge__(self, other):
+        return not (self < other)
+
+    def __bool__(self):
+        for i in self.digits:
+            if i != 0:
+                return True
+        return False
+
+    def __add__(self, other):
+        return addition().compute_with_numbers(self, other)
+
+    def __sub__(self, other):
+        return subtraction().compute_with_numbers(self, other)
+
+    def __mul__(self, other):
+        return multiplication().compute_with_numbers(self, other)
+
+    def __truediv__(self, other):
+        return division().compute_with_numbers(self, other)
+
+    def __neg__(self):
+        return Number(self.digits.copy(), Sign.opposite(self.sign))
+
     def compute(self):
         return self
-
-    def opposite_inverse(self):
-        return Number(self.digits.copy(), Sign.opposite(self.sign))
