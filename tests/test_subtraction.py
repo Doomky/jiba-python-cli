@@ -53,6 +53,14 @@ def test_two_digits_subtraction(token_queue, ten):
     assert result.digits[0] == 0
     assert result.digits[1] == 4
 
+def test_different_digits_number_subtraction(token_queue, ten, one):
+    token_queue.put(one)
+    token_queue.put(ten)
+    subtraction = Subtraction()
+    result = subtraction.compute()
+    assert result.sign == Sign.negative
+    assert len(result.digits) == 1
+    assert result.digits[0] == 9
 
 def test_simple_carry(token_queue):
     token_queue.put(Number([3, 5]))
