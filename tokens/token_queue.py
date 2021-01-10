@@ -1,11 +1,8 @@
 from queue import Queue
 from . import Token, Number
 
-
-# forward declaration for type checking
 class TokenQueue:
     pass
-
 
 class TokenQueue:
     Instance = None
