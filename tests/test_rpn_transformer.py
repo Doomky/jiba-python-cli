@@ -146,3 +146,19 @@ def test_multiple_operations_multiple_parenthesis_complex():
     assert isinstance(token_stack_list[12], Number)
     assert isinstance(token_stack_list[13], Subtraction)
     assert isinstance(token_stack_list[14], Multiplication)
+
+def test_global1():
+    input = "(3 + 8) * (5 / 2) - 1"
+    token_list: [Token] = TokenParser(input).parse()
+    token_stack: TokenStack = RpnTransformer(token_list).transform()
+    token_stack_list = list(token_stack.stack)
+    assert len(token_stack_list) == 9
+    assert isinstance(token_stack_list[0], Number) and token_stack_list[0].digits[0] == 3
+    assert isinstance(token_stack_list[1], Number) and token_stack_list[1].digits[0] == 8
+    assert isinstance(token_stack_list[2], Addition)
+    assert isinstance(token_stack_list[3], Number) and token_stack_list[3].digits[0] == 5
+    assert isinstance(token_stack_list[4], Number) and token_stack_list[4].digits[0] == 2
+    assert isinstance(token_stack_list[5], Division)
+    assert isinstance(token_stack_list[6], Multiplication)
+    assert isinstance(token_stack_list[7], Number) and token_stack_list[7].digits[0] == 1
+    assert isinstance(token_stack_list[8], Subtraction)

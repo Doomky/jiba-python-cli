@@ -12,7 +12,8 @@ class RpnTransformer:
 
     def transform(self) -> TokenStack:
         token_list_copy = self.token_list.copy()
-        token_stack = TokenStack()
+        token_stack = TokenStack.get_instance()
+        token_stack.clear()
         operator_stack = []
         while token_list_copy:
             token = token_list_copy.pop(0)
