@@ -115,3 +115,13 @@ def test_opposite_signs_numbers_subtraction2(token_queue):
     assert len(result.digits) == 2
     assert result.digits[0] == 5
     assert result.digits[1] == 2
+
+
+def test_different_size_numbers(token_queue, ten, one):
+    token_queue.put(ten)
+    token_queue.put(one)
+    subtraction = Subtraction()
+    result = subtraction.compute()
+    assert result.sign == Sign.positive
+    assert len(result.digits) == 1
+    assert result.digits[0] == 9
