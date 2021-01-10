@@ -24,8 +24,10 @@ class Subtraction(Operator):
             return Number(self.compute_with_numbers(b, a).digits, Sign.negative)
         res = []
         carry = 0
-        for i in range(max(len(a), len(b))):
-            diff = a[i] - b[i] - carry
+        b_len = len(b)
+        a_len = len(a)
+        for i in range(max(a_len, b_len)):
+            diff = (0 if i >= a_len else a[i]) - (0 if i >= b_len else b[i]) - carry
             if diff < 0:
                 diff += 10
                 carry = 1
