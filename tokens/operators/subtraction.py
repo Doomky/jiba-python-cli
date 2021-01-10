@@ -25,7 +25,9 @@ class Subtraction(Operator):
         res = []
         carry = 0
         for i in range(max(len(a), len(b))):
-            diff = a[i] - b[i] - carry
+            ai = a[i] if len(a) > i else 0
+            bi = b[i] if len(b) > i else 0
+            diff = ai - bi - carry
             if diff < 0:
                 diff += 10
                 carry = 1
