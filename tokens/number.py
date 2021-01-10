@@ -42,12 +42,12 @@ class Number(Token):
                 or (self.sign == other.sign == Sign.negative and len(self) > len(other)) \
                 or (self.sign == Sign.negative != other.sign):
             return False
-        for i in range(len(self)):
-            if self.sign == Sign.positive and self[i] <= other[i]:
-                return False
-            elif self.sign == Sign.negative and self[i] >= other[i]:
-                return False
-        return True
+        for i in range(len(self) - 1, -1, -1):
+            if self[i] < other[i]:
+                return self.sign == Sign.negative
+            if self[i] > other[i]:
+                return self.sign == Sign.positive
+        return False
 
     def compute(self):
         return self
