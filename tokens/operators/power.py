@@ -9,7 +9,11 @@ class NegativePowerError(Exception):
 
 
 class Power(Operator):
-    precedence = 2
+
+    precedence = 3
+
+    def __str__(self):
+        return "^"
 
     def compute(self) -> Number:
         a: Number = TokenQueue.get_instance().get_next()
