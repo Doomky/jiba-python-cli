@@ -1,4 +1,6 @@
 from enum import Enum
+from typing import List
+from command_context import CommandContext
 import typer
 
 
@@ -8,18 +10,19 @@ class Notation(str, Enum):
 
 
 app = typer.Typer()
-notationOption = typer.Option(Notation.infix, "--notation", "-n", help="calculation notation can be: infix or rpc. default is infix")
-baseOption = typer.Option(10, "--base", "-b", help="base for the compute")
+notationOption: Notation = typer.Option(Notation.infix, "--notation", "-n", help="Calculation notation")
+baseOption: int = typer.Option(10, "--base", "-b", help="Base for the calculation", min=2)
 
 
 @app.command()
-def compute(calculation: str,
+def compute(calculation: List[str],
             notation: Notation = notationOption,
             base: int = baseOption):
     typer.echo(f"Selected Notation: {notation}")
     typer.echo(f"Selected Base: {base}")
     typer.echo(f"Calculation: {calculation}")
-    raise Exception()
+    CommandContext.Base = base
+    CommandContext.IsInfix = (notation == Notation.infix)
 
 
 if __name__ == "__main__":

@@ -7,6 +7,8 @@ from command_context import CommandContext
 
 class Multiplication(Operator):
 
+    precedence = 2
+    
     def compute(self) -> Number:
         a: Number = TokenQueue.get_instance().get_next()
         b: Number = TokenQueue.get_instance().get_next()

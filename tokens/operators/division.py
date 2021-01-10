@@ -14,6 +14,8 @@ class DividingByZeroError(Exception):
 
 class Division(Operator):
 
+    precedence = 2
+    
     def compute(self) -> Number:
         a: Number = TokenQueue.get_instance().get_next()
         b: Number = TokenQueue.get_instance().get_next()
@@ -45,4 +47,3 @@ class Division(Operator):
         if a.sign != b.sign:
             q.sign = Sign.negative
         return q
-

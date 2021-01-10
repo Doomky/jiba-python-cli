@@ -170,14 +170,12 @@ def test_simple_one_plus_minus_ninety_nine(token_queue, one, minus_ninety_nine):
     assert result.sign == Sign.negative
     assert len(result.digits) == 2
     assert result.digits[0] == 8
-    assert result.digits[0] == 9
+    assert result.digits[1] == 9
 
-def test_simple_one_plus_minus_ninety_nine(token_queue, minus_one, one):
+def test_simple_minus_one_plus_one(token_queue, minus_one, one):
     token_queue.put(minus_one)
     token_queue.put(one)
     addition = Addition()
     result = addition.compute()
-    assert result.sign == Sign.negative
-    assert len(result.digits) == 2
-    assert result.digits[0] == 8
-    assert result.digits[0] == 9
+    assert len(result.digits) == 1
+    assert result.digits[0] == 0

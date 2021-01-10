@@ -1,6 +1,8 @@
 from tokens.number import Number, Sign
 from tokens.operator import Operator
 from tokens.token_queue import TokenQueue
+from command_context import CommandContext
+
 
 def addition():
     from tokens.operators.addition import Addition
@@ -8,6 +10,8 @@ def addition():
 
 
 class Subtraction(Operator):
+
+    precedence = 1
 
     def compute(self) -> Number:
         a: Number = TokenQueue.get_instance().get_next()
@@ -24,12 +28,12 @@ class Subtraction(Operator):
             return Number(self.compute_with_numbers(b, a).digits, Sign.negative)
         res = []
         carry = 0
-        for i in range(max(len(a), len(b))):
-            ai = a[i] if len(a) > i else 0
-            bi = b[i] if len(b) > i else 0
-            diff = ai - bi - carry
+        b_len = len(b)
+        a_len = len(a)
+        for i in range(max(a_len, b_len)):
+            diff = (0 if i >= a_len else a[i]) - (0 if i >= b_len else b[i]) - carry
             if diff < 0:
-                diff += 10
+                diff += CommandContext.Base
                 carry = 1
             else:
                 carry = 0
