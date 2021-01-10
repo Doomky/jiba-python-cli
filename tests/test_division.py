@@ -154,3 +154,35 @@ def test_large_number_divided_by_ninety_nine(token_queue, large_number, ninety_n
     assert result.digits[1] == 5
     assert result.digits[2] == 8
     assert result.digits[3] == 6
+
+
+# Negative numbers division
+
+def test_one_divided_by_minus_one(token_queue, one, minus_one):
+    token_queue.put(one)
+    token_queue.put(minus_one)
+    division = Division()
+    result = division.compute()
+    assert result.sign == Sign.negative
+    assert len(result.digits) == 1
+    assert result.digits[0] == 1
+
+
+def test_minus_one_divided_by_one(token_queue, minus_one, one):
+    token_queue.put(minus_one)
+    token_queue.put(one)
+    division = Division()
+    result = division.compute()
+    assert result.sign == Sign.negative
+    assert len(result.digits) == 1
+    assert result.digits[0] == 1
+
+
+def test_minus_one_divided_by_minus_one(token_queue, minus_one):
+    token_queue.put(minus_one)
+    token_queue.put(minus_one)
+    division = Division()
+    result = division.compute()
+    assert result.sign == Sign.positive
+    assert len(result.digits) == 1
+    assert result.digits[0] == 1
