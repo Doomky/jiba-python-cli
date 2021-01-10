@@ -1,6 +1,7 @@
 from tokens.number import Number, Sign
 from tokens.operator import Operator
 from tokens.token_queue import TokenQueue
+from command_context import CommandContext
 
 def addition():
     from tokens.operators.addition import Addition
@@ -29,7 +30,7 @@ class Subtraction(Operator):
         for i in range(max(a_len, b_len)):
             diff = (0 if i >= a_len else a[i]) - (0 if i >= b_len else b[i]) - carry
             if diff < 0:
-                diff += 10
+                diff += CommandContext.Base
                 carry = 1
             else:
                 carry = 0
