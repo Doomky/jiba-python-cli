@@ -35,6 +35,8 @@ def two():
 def four():
     return Number([4])
 
+def five():
+    return Number([5])
 
 @pytest.fixture
 def eight():
@@ -80,9 +82,7 @@ def test_one_power_one(token_queue, one):
     token_queue.put(one)
     power = Power()
     result = power.compute()
-    assert result.sign == Sign.positive
-    assert len(result.digits) == 1
-    assert result.digits[0] == 1
+    assert result == Number([1])
 
 
 def test_one_power_two(token_queue, one, two):
@@ -90,9 +90,7 @@ def test_one_power_two(token_queue, one, two):
     token_queue.put(two)
     power = Power()
     result = power.compute()
-    assert result.sign == Sign.positive
-    assert len(result.digits) == 1
-    assert result.digits[0] == 1
+    assert result == Number([1])
 
 
 def test_two_power_four(token_queue, two, four):
@@ -100,10 +98,7 @@ def test_two_power_four(token_queue, two, four):
     token_queue.put(four)
     power = Power()
     result = power.compute()
-    assert result.sign == Sign.positive
-    assert len(result.digits) == 2
-    assert result.digits[0] == 6
-    assert result.digits[1] == 1
+    assert result == Number([6, 1])
 
 
 def test_eight_power_four(token_queue, eight, four):
@@ -111,9 +106,15 @@ def test_eight_power_four(token_queue, eight, four):
     token_queue.put(four)
     power = Power()
     result = power.compute()
-    assert result.sign == Sign.positive
-    assert len(result.digits) == 4
-    assert result.digits[0] == 6
-    assert result.digits[1] == 9
-    assert result.digits[2] == 0
-    assert result.digits[3] == 4
+    assert result == Number([6, 9, 0, 4])
+
+
+# Complex power
+
+def test_ninety_nine_power_five(token_queue, ninety_nine, five):
+    token_queue.put(ninety_nine)
+    token_queue.put(five)
+    power = Power()
+    result = power.compute()
+    assert result == Number([9, 9, 4, 0, 0, 9, 9, 0, 5, 9])
+
