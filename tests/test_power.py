@@ -35,6 +35,7 @@ def two():
 def four():
     return Number([4])
 
+@pytest.fixture
 def five():
     return Number([5])
 
@@ -117,4 +118,22 @@ def test_ninety_nine_power_five(token_queue, ninety_nine, five):
     power = Power()
     result = power.compute()
     assert result == Number([9, 9, 4, 0, 0, 9, 9, 0, 5, 9])
+
+
+# Zero power
+
+def test_zero_power_four(token_queue, zero, four):
+    token_queue.put(zero)
+    token_queue.put(four)
+    power = Power()
+    result = power.compute()
+    assert result == Number([0])
+
+
+def test_four_power_zero(token_queue, zero, four):
+    token_queue.put(four)
+    token_queue.put(zero)
+    power = Power()
+    result = power.compute()
+    assert result == Number([1])
 
