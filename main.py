@@ -3,6 +3,8 @@ from typing import List
 from command_context import CommandContext
 import typer
 
+from tokens import TokenParser, RpnTransformer, RpnCalculator
+
 
 class Notation(str, Enum):
     infix = "infix"
@@ -20,9 +22,16 @@ def compute(calculation: List[str],
             base: int = baseOption):
     typer.echo(f"Selected Notation: {notation}")
     typer.echo(f"Selected Base: {base}")
-    typer.echo(f"Calculation: {calculation}")
-    CommandContext.Base = base
+    typer.echo(f"Calculation(s): {calculation}")
+    if base != CommandContext.Base:
+        CommandContext.Base = base
     CommandContext.IsInfix = (notation == Notation.infix)
+
+    for calc in calculation:
+        token_list = TokenParser(calc).parse()
+        token_stack = RpnTransformer(token_list).transform()
+        number = RpnCalculator(token_stack).compute()
+        typer.echo(f"Result: {number}")
 
 
 if __name__ == "__main__":
