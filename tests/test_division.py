@@ -1,5 +1,5 @@
 from tokens.number import Number, Sign
-from tokens.operators import Division
+from tokens.operators import Division, DividingByZeroError
 from tokens.token_queue import TokenQueue
 import pytest
 
@@ -186,3 +186,13 @@ def test_minus_one_divided_by_minus_one(token_queue, minus_one):
     assert result.sign == Sign.positive
     assert len(result.digits) == 1
     assert result.digits[0] == 1
+
+
+# Dividing by zero
+
+def test_dividing_by_zero(token_queue, one, zero):
+    with pytest.raises(DividingByZeroError):
+        token_queue.put(one)
+        token_queue.put(zero)
+        division = Division()
+        division.compute()
