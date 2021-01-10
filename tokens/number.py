@@ -22,6 +22,11 @@ def division():
     return Division()
 
 
+def power_op():
+    from tokens.operators.power import Power
+    return Power()
+
+
 class Sign(int, Enum):
     positive = 1
     negative = 2
@@ -109,6 +114,9 @@ class Number(Token):
 
     def __neg__(self):
         return Number(self.digits.copy(), Sign(-self.sign))
+
+    def __pow__(self, power):
+        return power_op().compute_with_numbers(self, power)
 
     def compute(self):
         return self
