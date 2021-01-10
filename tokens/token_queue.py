@@ -1,6 +1,8 @@
 from queue import Queue
 from . import Token, Number
 
+class TokenQueue:
+    pass
 
 class TokenQueue:
     Instance = None
@@ -9,10 +11,14 @@ class TokenQueue:
         self.queue = Queue()
 
     @staticmethod
-    def get_instance():
+    def get_instance() -> TokenQueue:
         if TokenQueue.Instance is None:
             TokenQueue.Instance = TokenQueue()
         return TokenQueue.Instance
+
+    def clear(self):
+        while not self.queue.empty():
+            self.queue.get()
 
     def put(self, token: Token):
         self.queue.put(token)
