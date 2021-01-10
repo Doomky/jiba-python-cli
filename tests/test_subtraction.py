@@ -1,4 +1,3 @@
-from tokens.token import Token
 from tokens.number import Number, Sign
 from tokens.operators import Subtraction
 from tokens.token_stack import TokenStack
@@ -6,22 +5,25 @@ import pytest
 
 # fixtures
 
+
 @pytest.fixture
 def one():
     return Number([1])
+
 
 @pytest.fixture
 def two():
     return Number([2])
 
+
 @pytest.fixture
 def ten():
     return Number([0, 1])
 
+
 @pytest.fixture
 def hundred():
     return Number([0, 0, 1])
-
 
 
 @pytest.fixture
@@ -30,8 +32,8 @@ def token_stack():
     token_stack.clear()
     return token_stack
 
-# simple subtraction
 
+# simple subtraction
 
 def test_simple_two_minus_one(token_stack, one, two):
     token_stack.push(two)
@@ -53,6 +55,7 @@ def test_two_digits_subtraction(token_stack, ten):
     assert result.digits[0] == 0
     assert result.digits[1] == 4
 
+
 def test_different_digits_number_subtraction(token_stack, ten, one):
     token_stack.push(one)
     token_stack.push(ten)
@@ -61,6 +64,7 @@ def test_different_digits_number_subtraction(token_stack, ten, one):
     assert result.sign == Sign.negative
     assert len(result.digits) == 1
     assert result.digits[0] == 9
+
 
 def test_simple_carry(token_stack):
     token_stack.push(Number([3, 5]))

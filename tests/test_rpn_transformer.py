@@ -147,6 +147,7 @@ def test_multiple_operations_multiple_parenthesis_complex():
     assert isinstance(token_stack_list[13], Subtraction)
     assert isinstance(token_stack_list[14], Multiplication)
 
+
 def test_global1():
     input = "(3 + 8) * (5 / 2) - 1"
     token_list: [Token] = TokenParser(input).parse()

@@ -116,7 +116,7 @@ def test_eight_times_four(token_stack, eight, four):
     assert result.digits[1] == 3
 
 
-# Mulitple digits multiplication
+# Multiple digits multiplication
 
 def test_ninety_nine_times_large_number(token_stack, ninety_nine, large_number):
     token_stack.push(ninety_nine)
@@ -235,6 +235,7 @@ def test_minus_one_times_one(token_stack, minus_one, one):
     assert result.sign == Sign.negative
     assert len(result.digits) == 1
     assert result.digits[0] == 1
+
 
 def test_minus_one_times_minus_one(token_stack, minus_one):
     token_stack.push(minus_one)
