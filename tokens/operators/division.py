@@ -7,6 +7,10 @@ from tokens.token_queue import TokenQueue
 from command_context import CommandContext
 
 
+class DividingByZeroError(Exception):
+    def __init__(self):
+        super().__init__("Illegal Operation detected : Cannot divide by zero")
+
 
 class Division(Operator):
 
@@ -16,6 +20,8 @@ class Division(Operator):
         return self.compute_with_numbers(a, b)
 
     def compute_with_numbers(self, a: Number, b: Number) -> Number:
+        if b == Number([0]):
+            raise DividingByZeroError()
         b_copy = Number(b.digits.copy())
         q = Number([0])
         r = Number(a.digits.copy())
