@@ -4,11 +4,6 @@ from tokens.token_stack import TokenStack
 from command_context import CommandContext
 
 
-def addition():
-    from tokens.operators.addition import Addition
-    return Addition()
-
-
 class Subtraction(Operator):
 
     precedence = 1
@@ -23,12 +18,11 @@ class Subtraction(Operator):
 
     def compute_with_numbers(self, a: Number, b: Number) -> Number:
         if a.sign != b.sign:
-            return addition()\
-                .compute_with_numbers(Number(a.digits, a.sign), b.opposite_inverse())
+            return Number(a.digits, a.sign) + (-b)
         elif a.sign == b.sign == Sign.negative:
-            return self.compute_with_numbers(b.opposite_inverse(), a.opposite_inverse())
+            return (-b) - (-a)
         elif a < b:
-            return Number(self.compute_with_numbers(b, a).digits, Sign.negative)
+            return Number((b - a).digits, Sign.negative)
         res = []
         carry = 0
         b_len = len(b)
