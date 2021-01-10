@@ -26,9 +26,11 @@ class Sign(int, Enum):
     positive = 1
     negative = 2
 
-    @staticmethod
-    def opposite(number):
-        if number == Sign.positive:
+    def __bool__(self):
+        return self == Sign.positive
+
+    def __neg__(self):
+        if self:
             return Sign.negative
         else:
             return Sign.positive
@@ -106,7 +108,7 @@ class Number(Token):
         return division().compute_with_numbers(self, other)
 
     def __neg__(self):
-        return Number(self.digits.copy(), Sign.opposite(self.sign))
+        return Number(self.digits.copy(), Sign(-self.sign))
 
     def compute(self):
         return self
