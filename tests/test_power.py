@@ -1,5 +1,5 @@
 from tokens.number import Number, Sign
-from tokens.operators import Power
+from tokens.operators import Power, NegativePowerError
 from tokens.token_queue import TokenQueue
 import pytest
 
@@ -137,3 +137,28 @@ def test_four_power_zero(token_queue, zero, four):
     result = power.compute()
     assert result == Number([1])
 
+
+# Negative numbers power
+
+def test_minus_one_power_four(token_queue, minus_one, four):
+    token_queue.put(minus_one)
+    token_queue.put(four)
+    power = Power()
+    result = power.compute()
+    assert result == Number([1])
+
+
+def test_minus_one_power_five(token_queue, minus_one, five):
+    token_queue.put(minus_one)
+    token_queue.put(five)
+    power = Power()
+    result = power.compute()
+    assert result == Number([1], Sign.negative)
+
+
+def test_one_power_minus_one(token_queue, one, minus_one):
+    with pytest.raises(NegativePowerError):
+        token_queue.put(one)
+        token_queue.put(minus_one)
+        power = Power()
+        power.compute()
