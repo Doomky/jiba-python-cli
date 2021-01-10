@@ -1,6 +1,6 @@
 from tokens.number import Number, Sign
 from tokens.operators import Division, DividingByZeroError
-from tokens.token_queue import TokenQueue
+from tokens.token_stack import TokenStack
 import pytest
 
 
@@ -72,17 +72,17 @@ def large_number():
 
 
 @pytest.fixture
-def token_queue():
-    token_queue = TokenQueue.get_instance()
-    token_queue.clear()
-    return token_queue
+def token_stack():
+    token_stack = TokenStack.get_instance()
+    token_stack.clear()
+    return token_stack
 
 
 # Single digit division
 
-def test_one_divided_by_one(token_queue, one):
-    token_queue.put(one)
-    token_queue.put(one)
+def test_one_divided_by_one(token_stack, one):
+    token_stack.push(one)
+    token_stack.push(one)
     division = Division()
     result = division.compute()
     assert result.sign == Sign.positive
@@ -90,9 +90,9 @@ def test_one_divided_by_one(token_queue, one):
     assert result.digits[0] == 1
 
 
-def test_one_divided_by_two(token_queue, one, two):
-    token_queue.put(one)
-    token_queue.put(two)
+def test_one_divided_by_two(token_stack, one, two):
+    token_stack.push(one)
+    token_stack.push(two)
     division = Division()
     result = division.compute()
     assert result.sign == Sign.positive
@@ -100,9 +100,9 @@ def test_one_divided_by_two(token_queue, one, two):
     assert result.digits[0] == 0
 
 
-def test_four_divided_by_two(token_queue, four, two):
-    token_queue.put(four)
-    token_queue.put(two)
+def test_four_divided_by_two(token_stack, four, two):
+    token_stack.push(four)
+    token_stack.push(two)
     division = Division()
     result = division.compute()
     assert result.sign == Sign.positive
@@ -110,9 +110,9 @@ def test_four_divided_by_two(token_queue, four, two):
     assert result.digits[0] == 2
 
 
-def test_eight_divided_by_three(token_queue, eight, three):
-    token_queue.put(eight)
-    token_queue.put(three)
+def test_eight_divided_by_three(token_stack, eight, three):
+    token_stack.push(eight)
+    token_stack.push(three)
     division = Division()
     result = division.compute()
     assert result.sign == Sign.positive
@@ -120,9 +120,9 @@ def test_eight_divided_by_three(token_queue, eight, three):
     assert result.digits[0] == 2
 
 
-def test_zero_divided_by_two(token_queue, zero, two):
-    token_queue.put(zero)
-    token_queue.put(two)
+def test_zero_divided_by_two(token_stack, zero, two):
+    token_stack.push(zero)
+    token_stack.push(two)
     division = Division()
     result = division.compute()
     assert result.sign == Sign.positive
@@ -132,9 +132,9 @@ def test_zero_divided_by_two(token_queue, zero, two):
 
 # Multiple digits division
 
-def test_ninety_nine_divided_by_one(token_queue, ninety_nine, one):
-    token_queue.put(ninety_nine)
-    token_queue.put(one)
+def test_ninety_nine_divided_by_one(token_stack, ninety_nine, one):
+    token_stack.push(ninety_nine)
+    token_stack.push(one)
     division = Division()
     result = division.compute()
     assert result.sign == Sign.positive
@@ -143,9 +143,9 @@ def test_ninety_nine_divided_by_one(token_queue, ninety_nine, one):
     assert result.digits[1] == 9
 
 
-def test_large_number_divided_by_ninety_nine(token_queue, large_number, ninety_nine):
-    token_queue.put(large_number)
-    token_queue.put(ninety_nine)
+def test_large_number_divided_by_ninety_nine(token_stack, large_number, ninety_nine):
+    token_stack.push(large_number)
+    token_stack.push(ninety_nine)
     division = Division()
     result = division.compute()
     assert result.sign == Sign.positive
@@ -158,9 +158,9 @@ def test_large_number_divided_by_ninety_nine(token_queue, large_number, ninety_n
 
 # Negative numbers division
 
-def test_one_divided_by_minus_one(token_queue, one, minus_one):
-    token_queue.put(one)
-    token_queue.put(minus_one)
+def test_one_divided_by_minus_one(token_stack, one, minus_one):
+    token_stack.push(one)
+    token_stack.push(minus_one)
     division = Division()
     result = division.compute()
     assert result.sign == Sign.negative
@@ -168,9 +168,9 @@ def test_one_divided_by_minus_one(token_queue, one, minus_one):
     assert result.digits[0] == 1
 
 
-def test_minus_one_divided_by_one(token_queue, minus_one, one):
-    token_queue.put(minus_one)
-    token_queue.put(one)
+def test_minus_one_divided_by_one(token_stack, minus_one, one):
+    token_stack.push(minus_one)
+    token_stack.push(one)
     division = Division()
     result = division.compute()
     assert result.sign == Sign.negative
@@ -178,9 +178,9 @@ def test_minus_one_divided_by_one(token_queue, minus_one, one):
     assert result.digits[0] == 1
 
 
-def test_minus_one_divided_by_minus_one(token_queue, minus_one):
-    token_queue.put(minus_one)
-    token_queue.put(minus_one)
+def test_minus_one_divided_by_minus_one(token_stack, minus_one):
+    token_stack.push(minus_one)
+    token_stack.push(minus_one)
     division = Division()
     result = division.compute()
     assert result.sign == Sign.positive
@@ -190,9 +190,9 @@ def test_minus_one_divided_by_minus_one(token_queue, minus_one):
 
 # Dividing by zero
 
-def test_dividing_by_zero(token_queue, one, zero):
+def test_dividing_by_zero(token_stack, one, zero):
     with pytest.raises(DividingByZeroError):
-        token_queue.put(one)
-        token_queue.put(zero)
+        token_stack.push(one)
+        token_stack.push(zero)
         division = Division()
         division.compute()

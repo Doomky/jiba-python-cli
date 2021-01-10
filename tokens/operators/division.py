@@ -3,7 +3,7 @@ from tokens.operator import Operator
 from tokens.operators.multiplication import Multiplication
 from tokens.operators.addition import Addition
 from tokens.operators.subtraction import Subtraction
-from tokens.token_queue import TokenQueue
+from tokens.token_stack import TokenStack
 from command_context import CommandContext
 
 
@@ -17,8 +17,8 @@ class Division(Operator):
     precedence = 2
     
     def compute(self) -> Number:
-        a: Number = TokenQueue.get_instance().get_next()
-        b: Number = TokenQueue.get_instance().get_next()
+        b: Number = TokenStack.get_instance().pop()
+        a: Number = TokenStack.get_instance().pop()
         return self.compute_with_numbers(a, b)
 
     def compute_with_numbers(self, a: Number, b: Number) -> Number:
