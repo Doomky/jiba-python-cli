@@ -4,11 +4,6 @@ from tokens.token_queue import TokenQueue
 from command_context import CommandContext
 
 
-def subtraction():
-    from tokens.operators.subtraction import Subtraction
-    return Subtraction()
-
-
 class Addition(Operator):
 
     precedence = 1
@@ -21,9 +16,9 @@ class Addition(Operator):
     def compute_with_numbers(self, a: Number, b: Number) -> Number:
         if a.sign != b.sign:
             if b.sign == Sign.negative:
-                return subtraction().compute_with_numbers(a, b.opposite_inverse())
+                return a - (-b)
             else:
-                return subtraction().compute_with_numbers(b, a.opposite_inverse())
+                return b - (-a)
 
         a_digits = a.digits.copy()
         b_digits = b.digits.copy()

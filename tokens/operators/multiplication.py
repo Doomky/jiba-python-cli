@@ -1,6 +1,5 @@
 from tokens.number import Number, Sign
 from tokens.operator import Operator
-from tokens.operators.addition import Addition
 from tokens.token_queue import TokenQueue
 from command_context import CommandContext
 
@@ -28,7 +27,7 @@ class Multiplication(Operator):
             else:
                 while len(digits) > 1 and digits[-1] == 0:
                     digits.pop()
-            res = Addition().compute_with_numbers(res, Number(digits, Sign.positive))
+            res = res + Number(digits, Sign.positive)
         if a.sign != b.sign:
             res.sign = Sign.negative
         return res
