@@ -119,3 +119,38 @@ def test_eight_divided_by_three(token_queue, eight, three):
     assert len(result.digits) == 1
     assert result.digits[0] == 2
 
+
+def test_zero_divided_by_two(token_queue, zero, two):
+    token_queue.put(zero)
+    token_queue.put(two)
+    division = Division()
+    result = division.compute()
+    assert result.sign == Sign.positive
+    assert len(result.digits) == 1
+    assert result.digits[0] == 0
+
+
+# Multiple digits division
+
+def test_ninety_nine_divided_by_one(token_queue, ninety_nine, one):
+    token_queue.put(ninety_nine)
+    token_queue.put(one)
+    division = Division()
+    result = division.compute()
+    assert result.sign == Sign.positive
+    assert len(result.digits) == 2
+    assert result.digits[0] == 9
+    assert result.digits[1] == 9
+
+
+def test_large_number_divided_by_ninety_nine(token_queue, large_number, ninety_nine):
+    token_queue.put(large_number)
+    token_queue.put(ninety_nine)
+    division = Division()
+    result = division.compute()
+    assert result.sign == Sign.positive
+    assert len(result.digits) == 4
+    assert result.digits[0] == 2
+    assert result.digits[1] == 5
+    assert result.digits[2] == 8
+    assert result.digits[3] == 6
